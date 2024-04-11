@@ -91,7 +91,7 @@ public class ModuleCrafter extends ModuleRecipe
                                 }
                             }
                         }
-                        if (valid)
+                        if (valid && getValidSlot() != null)
                         {
                             getCart().addItemToChest(result, getValidSlot(), null);
                             if (result.getCount() > 0)

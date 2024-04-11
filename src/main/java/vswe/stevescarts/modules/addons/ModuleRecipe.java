@@ -381,24 +381,19 @@ public abstract class ModuleRecipe extends ModuleAddon
             allTheSlots.clear();
             outputSlots.clear();
             final Class validSlot = getValidSlot();
-            for (final ModuleBase module2 : getCart().getModules())
-            {
-                if (module2.getSlots() != null)
-                {
-                    for (final SlotStevesCarts slot2 : module2.getSlots())
-                    {
-                        if (validSlot.isInstance(slot2))
-                        {
-                            outputSlots.add(slot2);
-                            allTheSlots.add(slot2);
-                        }
-                        else
-                        {
-                            if (!(slot2 instanceof SlotChest))
-                            {
-                                continue;
+            if (validSlot != null) {
+                for (final ModuleBase module2 : getCart().getModules()) {
+                    if (module2.getSlots() != null) {
+                        for (final SlotStevesCarts slot2 : module2.getSlots()) {
+                            if (validSlot.isInstance(slot2)) {
+                                outputSlots.add(slot2);
+                                allTheSlots.add(slot2);
+                            } else {
+                                if (!(slot2 instanceof SlotChest)) {
+                                    continue;
+                                }
+                                allTheSlots.add(slot2);
                             }
-                            allTheSlots.add(slot2);
                         }
                     }
                 }

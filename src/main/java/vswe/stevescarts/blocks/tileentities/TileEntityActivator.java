@@ -3,6 +3,9 @@ package vswe.stevescarts.blocks.tileentities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -52,6 +55,17 @@ public class TileEntityActivator extends TileEntityBase implements MenuProvider
         return options;
     }
 
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag() {
+        return saveWithoutMetadata();
+    }
+
     @Override
     public void load(@NotNull CompoundTag compoundTag)
     {
@@ -82,6 +96,7 @@ public class TileEntityActivator extends TileEntityBase implements MenuProvider
             if (optionId >= 0 && optionId < options.size())
             {
                 options.get(optionId).changeOption(leftClick);
+                setChanged();
             }
         }
     }

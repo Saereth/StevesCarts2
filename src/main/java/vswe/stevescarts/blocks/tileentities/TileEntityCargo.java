@@ -149,6 +149,7 @@ public class TileEntityCargo extends TileEntityManager implements MenuProvider
             {
                 receiveClickData(packetid, id, dif);
             }
+            setChanged();
         }
     }
 
@@ -423,9 +424,9 @@ public class TileEntityCargo extends TileEntityManager implements MenuProvider
         BlockState state = this.getBlockState();
         if (!(state.getBlock() instanceof BlockCargoManager))
         {
-            return new InvWrapper(this);
+            return new ItemStackHandler(0);
         }
-        return new ItemStackHandler(0);
+        return new InvWrapper(this);
     }
 
     @Override

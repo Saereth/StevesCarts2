@@ -58,7 +58,7 @@ public class ModuleSmelter extends ModuleRecipe
                 {
                     result = result.copy();
                 }
-                if (!result.isEmpty() && getCart().getModules() != null)
+                if (!result.isEmpty() && getCart().getModules() != null && getValidSlot() != null)
                 {
                     prepareLists();
                     if (canCraftMoreOfResult(result))
